@@ -29,6 +29,28 @@ For more details see [Basic writing and formatting syntax](https://docs.github.c
 
 Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/MaderDash/basicSnipits.github.io/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-### Support or Contact
+###Toggle Momentary switch🧮 
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+```
+byte buttonPin = 3;
+bool setState = false;
+
+void setup(){
+  pinMode(buttonPin, INPUT);
+  pinMode(13, OUTPUT);
+}
+
+void loop() {
+  if (digitalRead(buttonPin) == HIGH && lockout == false) {
+  setState = !setState;
+  lockout = true;
+  delay(50);
+  }
+  if (digitalRead(buttonPin) == LOW && lockout == true) {
+    lockout = false;
+    delay(50);
+  }
+  digitalWrite(13, setState);
+}
+
+```
