@@ -32,24 +32,33 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 ### Toggle Momentary switch 🔘
 
 ```
-byte buttonPin = 3;
-bool setState = false;
+// You will need a pull DOWN resistor conected to the button for this code to work.
+byte buttonPin = 3;  // this is where your button is conected.
+bool setState = false; // This varable is the state we are switching.
 
 void setup(){
-  pinMode(buttonPin, INPUT);
-  pinMode(13, OUTPUT);
+  pinMode(buttonPin, INPUT);  // Sets the input for the button
+  pinMode(13, OUTPUT);         // Sets pin 13 to output for the onboard led on the uno board.
 }
 
 void loop() {
+    /* This first if statment triggers when the button is pulled high.
+        If the button is held, this will not keep cycleing, it will only work  one time.
+    */
   if (digitalRead(buttonPin) == HIGH && lockout == false) {
   setState = !setState;
   lockout = true;
   delay(50);
   }
+  /*  This if statment waits untill you release the button
+       Then It resets the button for the next press.
+       There are 50 miliseccond delays just to keep things stable.
+  */
   if (digitalRead(buttonPin) == LOW && lockout == true) {
     lockout = false;
     delay(50);
   }
+  // This is where we change the state of the pin, baised off of the state of the varable.
   digitalWrite(13, setState);
 }
 
